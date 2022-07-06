@@ -75,7 +75,7 @@ OMPI_reinit_state_t state_gl;
 //to determine if there is a need to sync values to the failed processes
 int failure = 0, local_failure = 0;
 
-int wrong_input_from = 0;
+int wrong_input_form = 0;
 
 /*--------------------------------------------*/
 
@@ -88,7 +88,7 @@ int resilient_main(int argc, char *argv[], OMPI_reinit_state_t state) {
     MPI_Comm_size(current_comm, &total);
     state_gl = state;
     check_args(argv);
-    if (!wrong_input_from) {
+    if (!wrong_input_form) {
         all_pts_init = atof(argv[1]);
         if (IS_NEW) {
             all_pts = all_pts_init;
@@ -160,7 +160,7 @@ int main(int argc, char *argv[]) {
 void check_args(char *argv[]) {
 
     if (!argv[1] || !argv[2]) {
-        wrong_input_from = 1;
+        wrong_input_form = 1;
         if (IS_ROOT) {
             printf("Specify total number of points and the kill mode(0 or else)\ne.g.: $ mpirun -np %d --mca orte_enable_recovery 1 %s 10000000 0\n",
                    total, argv[0]);
